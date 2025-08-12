@@ -7,10 +7,10 @@ import '@/styles/tailwind.css'
 export const metadata: Metadata = {
   title: {
     template: '%s - TaxPal',
-    default: 'TaxPal - Accounting made simple for small businesses',
+    default: 'SBPS Entertainment - Technology For Fundraisers',
   },
   description:
-    'Most bookkeeping software is accurate, but hard to use. We make the opposite trade-off, and hope you don’t get audited.',
+    'SBPS Entertainment is a company founded with the hope of giving fundraisers and nonprofits the tools they need.',
 }
 
 const inter = Inter({
