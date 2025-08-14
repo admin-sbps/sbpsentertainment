@@ -1,0 +1,30 @@
+[
+  {
+    "slug": "ig-squares-portrait",
+    "title": "Squares for Every NFL & NCAAF Game",
+    "subtitle": "Run Super Bowl–style contests all season",
+    "badge": "FOOTBALL SEASON",
+    "handle": "@superbowlpoolsite",
+    "w": 1080,
+    "h": 1350,
+    "theme": "dark",
+    "accent": "#FFC107",
+    "bg": "/images/email_designs/squares_email_header_w_logo.gif",
+    "bullets": "No apps required,Instant share link,Auto-numbered board",
+    "cta": "Create a Squares Contest →"
+  },
+  {
+    "slug": "ig-squares-square",
+    "title": "Squares for Every Game",
+    "subtitle": "NFL + College • Weekly",
+    "badge": "WEEKLY CONTESTS",
+    "handle": "@superbowlpoolsite",
+    "w": 1080,
+    "h": 1080,
+    "theme": "dark",
+    "accent": "#22d3ee",
+    "bg": "/images/email_designs/squares_email_header.gif",
+    "bullets": "Pick your square,We draw numbers fairly,Share your board",
+    "cta": "Try it Free →"
+  }
+]

@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cards": "concurrently -k \"next dev -p 4000\" \"wait-on http-get://localhost:4000 && node scripts/render-cards.cjs\"",
+    "open-cards": "echo 'Generated PNGs:' && ls -1 out/cards && echo '\nTo view, open the Codespaces file browser and navigate to out/cards/'"
   },
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {
@@ -25,10 +27,13 @@
     "typescript": "^5.3.3"
   },
   "devDependencies": {
+    "concurrently": "^9.2.0",
     "eslint": "^8.56.0",
     "eslint-config-next": "^14.0.4",
+    "playwright": "^1.54.2",
     "prettier": "^3.3.2",
     "prettier-plugin-tailwindcss": "^0.6.11",
-    "sharp": "0.33.1"
+    "sharp": "0.33.1",
+    "wait-on": "^8.0.4"
   }
 }
