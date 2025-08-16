@@ -179,7 +179,7 @@ function ClaimModal({
             <h3 className="text-lg font-bold tracking-tight">Claim Your Square!</h3>
           </div>
           <p className="text-sm text-slate-300">
-            You're claiming square <span className="font-bold text-orange-400">{cellLabel}</span>
+            You are claiming square <span className="font-bold text-orange-400">{cellLabel}</span>
           </p>
           <p className="text-xs text-slate-400 mt-1">
             $50 entry fee • Winners split the pot!
