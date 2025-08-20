@@ -8,10 +8,14 @@ import {
   CloudArrowUpIcon,
   LockClosedIcon,
   ServerIcon,
+  BuildingStorefrontIcon,
+  BuildingOffice2Icon,
+  UsersIcon,
 } from '@heroicons/react/20/solid'
 
 const navigation = [
   { name: 'Home', href: '#hero' },
+  { name: 'Solutions', href: '#solutions' },
   { name: 'Our Mission', href: '#features' },
   { name: 'Contact', href: '#contact' },
 ]
@@ -53,6 +57,28 @@ const secondaryFeatures = [
       'We are passionate about building strong communities and believe that our platforms can be a force for good, from friendly contests to charitable fundraising.',
     href: 'https://superbowlpoolsite.com/fundraising',
     icon: CloudArrowUpIcon,
+  },
+]
+
+// Custom contest showcases
+const customContestShowcases = [
+  {
+    name: 'Local Promotions',
+    description: 'Perfect for local bars or restaurants to drive foot traffic with exciting game-day contests.',
+    icon: BuildingStorefrontIcon,
+    href: '/custom_squares_contest',
+  },
+  {
+    name: 'National Brand Campaigns',
+    description: 'Empower franchisees to run branded, location-specific giveaways that feed into a larger campaign.',
+    icon: BuildingOffice2Icon,
+    href: '/national-chain',
+  },
+  {
+    name: 'Employee Engagement',
+    description: 'Foster team spirit and competition in the workplace with fun, branded contests and giveaways.',
+    icon: UsersIcon,
+    href: '/team-building',
   },
 ]
 
@@ -163,89 +189,95 @@ export default function Example() {
 
       <main>
         {/* Hero section */}
-        <div id="hero" className="relative isolate pt-14">
-          <svg
+        <div id="hero" className="relative isolate px-6 pt-14 lg:px-8">
+          <div
             aria-hidden="true"
-            className="absolute inset-0 -z-10 size-full mask-[radial-gradient(100%_100%_at_top_right,white,transparent)] stroke-gray-200 dark:stroke-white/10"
+            className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
           >
-            <defs>
-              <pattern
-                x="50%"
-                y={-1}
-                id="83fd4e5a-9d52-42fc-97b6-718e5d7ee527"
-                width={200}
-                height={200}
-                patternUnits="userSpaceOnUse"
-              >
-                <path d="M100 200V.5M.5 .5H200" fill="none" />
-              </pattern>
-            </defs>
-            <svg x="50%" y={-1} className="overflow-visible fill-gray-50 dark:fill-gray-800/50">
-              <path
-                d="M-100.5 0h201v201h-201Z M699.5 0h201v201h-201Z M499.5 400h201v201h-201Z M-300.5 600h201v201h-201Z"
-                strokeWidth={0}
-              />
-            </svg>
-            <rect fill="url(#83fd4e5a-9d52-42fc-97b6-718e5d7ee527)" width="100%" height="100%" strokeWidth={0} />
-          </svg>
-          <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-center lg:gap-x-10 lg:px-8 lg:py-40">
-            <div className="mx-auto max-w-2xl lg:mx-0 lg:flex-auto">
-              <div className="flex">
-                <div className="relative flex items-center gap-x-4 rounded-full bg-white px-4 py-1 text-sm/6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20 dark:bg-white/5 dark:text-gray-300 dark:ring-white/10 dark:hover:ring-white/20">
-                  <span className="font-semibold text-indigo-600 dark:text-indigo-400">Our Flagship Site</span>
-                  <span aria-hidden="true" className="h-4 w-px bg-gray-900/10 dark:bg-white/10" />
-                  <a href="https://superbowlpoolsite.com" rel="nofollow" className="flex items-center gap-x-1">
-                    <span aria-hidden="true" className="absolute inset-0" />
-                    Visit SuperBowlPoolSite.com
-                    <ChevronRightIcon aria-hidden="true" className="-mr-2 size-5 text-gray-400" />
-                  </a>
-                </div>
+            <div
+              style={{
+                clipPath:
+                  'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
+              }}
+              className="relative left-[calc(50%-11rem)] aspect-1155/678 w-[36.09375rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+            />
+          </div>
+          <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+            <div className="hidden sm:mb-8 sm:flex sm:justify-center">
+              <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20 dark:text-gray-400 dark:ring-white/10 dark:hover:ring-white/20">
+                <span className="font-semibold text-indigo-600 dark:text-indigo-400">Our Flagship Site</span>
+                <span aria-hidden="true" className="mx-2 h-4 w-px bg-gray-900/10 dark:bg-white/10" />
+                <a href="https://superbowlpoolsite.com" rel="nofollow" className="inline-flex items-center gap-x-1">
+                  Visit SuperBowlPoolSite.com
+                  <ChevronRightIcon aria-hidden="true" className="-mr-2 size-5 text-gray-400" />
+                </a>
               </div>
-              <h1 className="mt-10 text-5xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-7xl dark:text-white">
+            </div>
+            <div className="text-center">
+              <h1 className="text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-7xl dark:text-white">
                 Connecting Communities Through Fun and Technology
               </h1>
               <p className="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8 dark:text-gray-400">
                 SBPS Entertainment is a technology company behind sites like SuperBowlPoolSite.com, the world&lsquo;s longest-running website offering free online squares contests. We are dedicated to building fun, engaging, and reliable digital platforms.
               </p>
-              <div className="mt-10 flex items-center gap-x-6">
+              <div className="mt-10 flex items-center justify-center gap-x-6">
                 <a
                   href="https://superbowlpoolsite.com"
                   rel="nofollow"
-                  className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500"
+                  className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500"
                 >
                   Visit Our Site
                 </a>
               </div>
             </div>
-            <div className="mt-16 sm:mt-24 lg:mt-0 lg:shrink-0 lg:grow">
-              <svg role="img" viewBox="0 0 366 729" className="mx-auto w-91.5 max-w-full drop-shadow-xl">
-                <title>Technology Platform Screenshot</title>
-                <defs>
-                  <clipPath id="2ade4387-9c63-4fc4-b754-10e687a0d332">
-                    <rect rx={36} width={316} height={684} />
-                  </clipPath>
-                </defs>
-                <path
-                  d="M363.315 64.213C363.315 22.99 341.312 1 300.092 1H66.751C25.53 1 3.528 22.99 3.528 64.213v44.68l-.857.143A2 2 0 0 0 1 111.009v24.611a2 2 0 0 0 1.671 1.973l.95.158a2.26 2.26 0 0 1-.093.236v26.173c.212.1.398.296.541.643l-1.398.233A2 2 0 0 0 1 167.009v47.611a2 2 0 0 0 1.671 1.973l1.368.228c-.139.319-.314.533-.511.653v16.637c.221.104.414.313.56.689l-1.417.236A2 2 0 0 0 1 237.009v47.611a2 2 0 0 0 1.671 1.973l1.347.225c-.135.294-.302.493-.49.607v377.681c0 41.213 22 63.208 63.223 63.208h95.074c.947-.504 2.717-.843 4.745-.843l.141.001h.194l.086-.001 33.704.005c1.849.043 3.442.37 4.323.838h95.074c41.222 0 63.223-21.999 63.223-63.212v-394.63c-.259-.275-.48-.796-.63-1.47l-.011-.133 1.655-.276A2 2 0 0 0 366 266.62v-77.611a2 2 0 0 0-1.671-1.973l-1.712-.285c.148-.839.396-1.491.698-1.811V64.213Z"
-                  fill="#4B5563"
-                />
-                <path
-                  d="M16 59c0-23.748 19.252-43 43-43h246c23.748 0 43 19.252 43 43v615c0 23.196-18.804 42-42 42H58c-23.196 0-42-18.804-42-42V59Z"
-                  fill="#343E4E"
-                />
-                <foreignObject
-                  width={316}
-                  height={684}
-                  clipPath="url(#2ade4387-9c63-4fc4-b754-10e687a0d332)"
-                  transform="translate(24 24)"
-                >
-                  <img
-                    alt="Generic app screenshot"
-                    src="https://tailwindcss.com/plus-assets/img/component-images/mobile-app-screenshot.png"
-                  />
-                </foreignObject>
-              </svg>
-            </div>
+          </div>
+          <div
+            aria-hidden="true"
+            className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
+          >
+            <div
+              style={{
+                clipPath:
+                  'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
+              }}
+              className="relative left-[calc(50%+3rem)] aspect-1155/678 w-[36.09375rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
+            />
+          </div>
+        </div>
+
+        {/* Solutions section */}
+        <div id="solutions" className="mx-auto mt-24 max-w-7xl px-6 sm:mt-32 lg:px-8">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">Our Custom Contest Solutions</h2>
+            <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl lg:text-balance dark:text-white">
+              Tailored platforms for any brand or audience
+            </p>
+            <p className="mt-6 text-lg/8 text-gray-600 dark:text-gray-300">
+              From local promotions to large-scale national campaigns, we have a solution to help you connect with your community.
+            </p>
+          </div>
+          <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
+            <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
+              {customContestShowcases.map((showcase) => (
+                <div key={showcase.name} className="flex flex-col">
+                  <dt className="flex items-center gap-x-3 text-base/7 font-semibold leading-7 text-gray-900 dark:text-white">
+                    <showcase.icon
+                      aria-hidden="true"
+                      className="size-5 flex-none text-indigo-600 dark:text-indigo-400"
+                    />
+                    {showcase.name}
+                  </dt>
+                  <dd className="mt-4 flex flex-auto flex-col text-base/7 leading-7 text-gray-600 dark:text-gray-400">
+                    <p className="flex-auto">{showcase.description}</p>
+                    <p className="mt-6">
+                      <a href={showcase.href} className="text-sm font-semibold leading-6 text-indigo-600 dark:text-indigo-400">
+                        View Demo <span aria-hidden="true">→</span>
+                      </a>
+                    </p>
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </div>
 
