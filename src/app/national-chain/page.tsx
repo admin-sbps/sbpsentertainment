@@ -167,7 +167,7 @@ const PrizeShowcase: React.FC<PrizeShowcaseProps> = ({ prizes, currentWeek }) =>
     <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl p-4 md:p-6 mb-4">
       <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
         <Star className="w-5 h-5 text-yellow-400" />
-        This Week's Prizes
+        Weekly Prizes
       </h3>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
         {prizes.map((prize, idx) => (
@@ -313,7 +313,7 @@ const EntryModal: React.FC<EntryModalProps> = ({ open, onClose, onSubmit, entryN
             <h3 className="text-lg font-bold">Complete Your Entry!</h3>
           </div>
           <p className="text-sm text-slate-300">
-            You're entering with number <span className="font-bold text-emerald-400">#{String(entryNumber).padStart(3, '0')}</span>
+            You are entering with number <span className="font-bold text-emerald-400">#{String(entryNumber).padStart(3, '0')}</span>
           </p>
           <p className="text-xs text-slate-400 mt-1">
             Location: {location.name}
@@ -378,7 +378,7 @@ const EntryModal: React.FC<EntryModalProps> = ({ open, onClose, onSubmit, entryN
               className="mt-0.5 rounded accent-emerald-500"
             />
             <span className="text-slate-300">
-              Yes, I'd like to receive exclusive offers and updates from FreshMart
+              Yes, I would like to receive exclusive offers and updates from FreshMart
             </span>
           </label>
 
