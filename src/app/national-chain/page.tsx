@@ -1,3 +1,5 @@
+'use client' // This is what you need
+
 import React, { useState } from 'react';
 
 // Icon Components
