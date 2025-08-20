@@ -1,16 +1,20 @@
-'use client' // This is what you need
+'use client'
 
 import React, { useState } from 'react';
 
 // Icon Components
-const Gift: React.FC<{ className?: string }> = ({ className = "w-5 h-5" }) => (
+interface IconProps {
+  className?: string;
+}
+
+const Gift: React.FC<IconProps> = ({ className = "w-5 h-5" }) => (
   <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
       d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
   </svg>
 );
 
-const MapPin: React.FC<{ className?: string }> = ({ className = "w-5 h-5" }) => (
+const MapPin: React.FC<IconProps> = ({ className = "w-5 h-5" }) => (
   <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
       d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -19,25 +23,25 @@ const MapPin: React.FC<{ className?: string }> = ({ className = "w-5 h-5" }) => 
   </svg>
 );
 
-const Star: React.FC<{ className?: string }> = ({ className = "w-5 h-5" }) => (
+const Star: React.FC<IconProps> = ({ className = "w-5 h-5" }) => (
   <svg className={className} fill="currentColor" viewBox="0 0 20 20">
     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
   </svg>
 );
 
-const Check: React.FC<{ className?: string }> = ({ className = "w-5 h-5" }) => (
+const Check: React.FC<IconProps> = ({ className = "w-5 h-5" }) => (
   <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
   </svg>
 );
 
-const ChevronDown: React.FC<{ className?: string }> = ({ className = "w-4 h-4" }) => (
+const ChevronDown: React.FC<IconProps> = ({ className = "w-4 h-4" }) => (
   <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
   </svg>
 );
 
-const X: React.FC<{ className?: string }> = ({ className = "w-5 h-5" }) => (
+const X: React.FC<IconProps> = ({ className = "w-5 h-5" }) => (
   <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
   </svg>
@@ -124,6 +128,7 @@ const BrandHeader: React.FC<BrandHeaderProps> = ({ selectedLocation, onLocationC
         
         <div className="relative">
           <button 
+            type="button"
             onClick={() => setDropdownOpen(!dropdownOpen)}
             className="flex items-center gap-2 bg-black/20 px-3 py-1.5 rounded-full hover:bg-black/30 transition-colors"
           >
@@ -136,6 +141,7 @@ const BrandHeader: React.FC<BrandHeaderProps> = ({ selectedLocation, onLocationC
             <div className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-xl z-50">
               {locations.map(loc => (
                 <button
+                  type="button"
                   key={loc.id}
                   onClick={() => {
                     onLocationChange(loc);
@@ -203,6 +209,7 @@ const EntryGrid: React.FC<EntryGridProps> = ({ entries, onSelectEntry }) => {
       <div className="grid grid-cols-10 gap-2">
         {entries.map((entry, idx) => (
           <button
+            type="button"
             key={idx}
             onClick={() => !entry.claimed && onSelectEntry(idx)}
             onMouseEnter={() => setHoveredEntry(idx)}
@@ -257,15 +264,14 @@ const EntryModal: React.FC<EntryModalProps> = ({ open, onClose, onSubmit, entryN
 
   if (!open || entryNumber === null) return null;
 
-
-
   const handleInputChange = (field: keyof FormData, value: string | boolean) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true">
       <button 
+        type="button"
         className="absolute inset-0 bg-black/70 backdrop-blur-sm" 
         onClick={onClose}
         aria-label="Close modal"
@@ -273,6 +279,7 @@ const EntryModal: React.FC<EntryModalProps> = ({ open, onClose, onSubmit, entryN
       
       <div className="relative w-full max-w-md rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 ring-1 ring-white/10 p-6 text-white shadow-2xl">
         <button
+          type="button"
           onClick={onClose}
           className="absolute top-4 right-4 text-white/60 hover:text-white"
           aria-label="Close"
@@ -288,7 +295,7 @@ const EntryModal: React.FC<EntryModalProps> = ({ open, onClose, onSubmit, entryN
             <h3 className="text-lg font-bold">Complete Your Entry!</h3>
           </div>
           <p className="text-sm text-slate-300">
-            You're entering with number <span className="font-bold text-emerald-400">#{String(entryNumber).padStart(3, '0')}</span>
+            You&apos;re entering with number <span className="font-bold text-emerald-400">#{String(entryNumber).padStart(3, '0')}</span>
           </p>
           <p className="text-xs text-slate-400 mt-1">
             Location: {location.name}
@@ -348,12 +355,13 @@ const EntryModal: React.FC<EntryModalProps> = ({ open, onClose, onSubmit, entryN
               className="mt-0.5 rounded accent-emerald-500"
             />
             <span className="text-slate-300">
-              Yes, I'd like to receive exclusive offers and updates from FreshMart
+              Yes, I&apos;d like to receive exclusive offers and updates from FreshMart
             </span>
           </div>
 
           <div className="mt-6 flex gap-3">
             <button
+              type="button"
               onClick={() => {
                 if (formData.name && formData.email && formData.phone) {
                   onSubmit(formData);
@@ -371,6 +379,7 @@ const EntryModal: React.FC<EntryModalProps> = ({ open, onClose, onSubmit, entryN
               Submit Entry
             </button>
             <button
+              type="button"
               onClick={onClose}
               className="rounded-xl px-4 py-2.5 text-sm font-semibold ring-1 ring-white/15 hover:bg-white/5"
             >
