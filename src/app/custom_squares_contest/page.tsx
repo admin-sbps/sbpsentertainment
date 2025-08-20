@@ -1,7 +1,22 @@
-// src/app/custom_squares_contest/page.tsx
 'use client'
 
 import React, { useMemo, useState, useCallback, useEffect } from 'react'
+import Image from 'next/image' // Import the Image component
+
+// Hero Icons as React components
+const BeerIcon = () => (
+  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
+      d="M9 2v2m6-2v2M9 20v2m6-2v2m2-10h2m-2 4h2M7 8h10v10H7V8zm0 0V6a2 2 0 012-2h6a2 2 0 012 2v2" />
+  </svg>
+)
+
+const TrophyIcon = () => (
+  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
+      d="M12 15v-3m-3 3h6M5 8h2a1 1 0 001-1V5a2 2 0 012-2h4a2 2 0 012 2v2a1 1 0 001 1h2a3 3 0 013 3v1a5 5 0 01-5 5H7a5 5 0 01-5-5v-1a3 3 0 013-3z" />
+  </svg>
+)
 
 type ScoreLine = {
   q1?: number
@@ -29,21 +44,6 @@ type SquaresGridProps = {
 }
 
 const defaultNums = Array.from({ length: 10 }, (_, i) => String(i))
-
-// Hero Icons as React components
-const BeerIcon = () => (
-  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
-      d="M9 2v2m6-2v2M9 20v2m6-2v2m2-10h2m-2 4h2M7 8h10v10H7V8zm0 0V6a2 2 0 012-2h6a2 2 0 012 2v2" />
-  </svg>
-)
-
-const TrophyIcon = () => (
-  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
-      d="M12 15v-3m-3 3h6M5 8h2a1 1 0 001-1V5a2 2 0 012-2h4a2 2 0 012 2v2a1 1 0 001 1h2a3 3 0 013 3v1a5 5 0 01-5 5H7a5 5 0 01-5-5v-1a3 3 0 013-3z" />
-  </svg>
-)
 
 // Brand Header Component
 function BrandHeader() {
@@ -164,10 +164,11 @@ function ClaimModal({
       aria-modal="true"
       aria-label="Claim square"
     >
-      <button 
-        className="absolute inset-0 bg-black/70 backdrop-blur-sm" 
-        onClick={onClose} 
-        aria-label="Close" 
+      <button
+        type="button"
+        className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+        onClick={onClose}
+        aria-label="Close"
       />
 
       <div className="relative w-full max-w-md rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 ring-1 ring-white/10 p-6 text-white shadow-2xl">

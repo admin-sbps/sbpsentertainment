@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 
 // Icon Components
 interface IconProps {
@@ -127,7 +127,7 @@ const BrandHeader: React.FC<BrandHeaderProps> = ({ selectedLocation, onLocationC
         </div>
         
         <div className="relative">
-          <button 
+          <button
             type="button"
             onClick={() => setDropdownOpen(!dropdownOpen)}
             className="flex items-center gap-2 bg-black/20 px-3 py-1.5 rounded-full hover:bg-black/30 transition-colors"
@@ -171,7 +171,7 @@ const PrizeShowcase: React.FC<PrizeShowcaseProps> = ({ prizes, currentWeek }) =>
       </h3>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
         {prizes.map((prize, idx) => (
-          <div key={idx} className="bg-white/10 backdrop-blur-sm rounded-lg p-3 border border-white/20">
+          <div key={prize.name + idx} className="bg-white/10 backdrop-blur-sm rounded-lg p-3 border border-white/20">
             <div className="text-emerald-400 font-bold text-sm mb-1">{prize.tier}</div>
             <div className="text-white font-semibold">{prize.name}</div>
             <div className="text-white/60 text-sm mt-1">{prize.value}</div>
@@ -207,12 +207,12 @@ const EntryGrid: React.FC<EntryGridProps> = ({ entries, onSelectEntry }) => {
       </div>
       
       <div className="grid grid-cols-10 gap-2">
-        {entries.map((entry, idx) => (
+        {entries.map((entry) => (
           <button
             type="button"
-            key={idx}
-            onClick={() => !entry.claimed && onSelectEntry(idx)}
-            onMouseEnter={() => setHoveredEntry(idx)}
+            key={entry.number}
+            onClick={() => !entry.claimed && onSelectEntry(entry.number - 1)}
+            onMouseEnter={() => setHoveredEntry(entry.number - 1)}
             onMouseLeave={() => setHoveredEntry(null)}
             disabled={entry.claimed}
             className={`
@@ -224,14 +224,14 @@ const EntryGrid: React.FC<EntryGridProps> = ({ entries, onSelectEntry }) => {
             `}
           >
             <span className="absolute inset-0 flex items-center justify-center">
-              {String(idx + 1).padStart(3, '0')}
+              {String(entry.number).padStart(3, '0')}
             </span>
             {entry.claimed && (
               <div className="absolute -top-1 -right-1 bg-red-500 rounded-full p-0.5">
                 <Check className="w-3 h-3 text-white" />
               </div>
             )}
-            {hoveredEntry === idx && !entry.claimed && (
+            {hoveredEntry === entry.number - 1 && !entry.claimed && (
               <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-black/90 text-white text-xs px-2 py-1 rounded whitespace-nowrap z-20">
                 Click to select
               </div>
@@ -264,8 +264,26 @@ const EntryModal: React.FC<EntryModalProps> = ({ open, onClose, onSubmit, entryN
 
   if (!open || entryNumber === null) return null;
 
-  const handleInputChange = (field: keyof FormData, value: string | boolean) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type, checked } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value,
+    }));
+  };
+
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (formData.name && formData.email && formData.phone) {
+      onSubmit(formData);
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        loyaltyNumber: '',
+        marketingOptIn: false
+      });
+    }
   };
 
   return (
@@ -295,85 +313,78 @@ const EntryModal: React.FC<EntryModalProps> = ({ open, onClose, onSubmit, entryN
             <h3 className="text-lg font-bold">Complete Your Entry!</h3>
           </div>
           <p className="text-sm text-slate-300">
-            You&apos;re entering with number <span className="font-bold text-emerald-400">#{String(entryNumber).padStart(3, '0')}</span>
+            You're entering with number <span className="font-bold text-emerald-400">#{String(entryNumber).padStart(3, '0')}</span>
           </p>
           <p className="text-xs text-slate-400 mt-1">
             Location: {location.name}
           </p>
         </div>
 
-        <div className="space-y-4">
-          <div className="block text-sm">
+        <form onSubmit={handleFormSubmit} className="space-y-4">
+          <label className="block text-sm">
             <span className="mb-1 block text-slate-200 font-medium">Full Name *</span>
             <input
               type="text"
+              name="name"
               required
               value={formData.name}
-              onChange={(e) => handleInputChange('name', e.target.value)}
+              onChange={handleInputChange}
               className="w-full rounded-lg bg-slate-800/50 px-3 py-2 outline-none ring-1 ring-white/10 focus:ring-2 focus:ring-emerald-500/50 text-white"
             />
-          </div>
+          </label>
 
-          <div className="block text-sm">
+          <label className="block text-sm">
             <span className="mb-1 block text-slate-200 font-medium">Email *</span>
             <input
               type="email"
+              name="email"
               required
               value={formData.email}
-              onChange={(e) => handleInputChange('email', e.target.value)}
+              onChange={handleInputChange}
               className="w-full rounded-lg bg-slate-800/50 px-3 py-2 outline-none ring-1 ring-white/10 focus:ring-2 focus:ring-emerald-500/50 text-white"
             />
-          </div>
+          </label>
 
-          <div className="block text-sm">
+          <label className="block text-sm">
             <span className="mb-1 block text-slate-200 font-medium">Phone *</span>
             <input
               type="tel"
+              name="phone"
               required
               value={formData.phone}
-              onChange={(e) => handleInputChange('phone', e.target.value)}
+              onChange={handleInputChange}
               className="w-full rounded-lg bg-slate-800/50 px-3 py-2 outline-none ring-1 ring-white/10 focus:ring-2 focus:ring-emerald-500/50 text-white"
             />
-          </div>
+          </label>
 
-          <div className="block text-sm">
+          <label className="block text-sm">
             <span className="mb-1 block text-slate-200 font-medium">FreshMart Rewards # (Optional)</span>
             <input
               type="text"
+              name="loyaltyNumber"
               value={formData.loyaltyNumber}
-              onChange={(e) => handleInputChange('loyaltyNumber', e.target.value)}
+              onChange={handleInputChange}
               className="w-full rounded-lg bg-slate-800/50 px-3 py-2 outline-none ring-1 ring-white/10 focus:ring-2 focus:ring-emerald-500/50 text-white"
               placeholder="Earn 2x entries!"
             />
-          </div>
+          </label>
 
-          <div className="flex items-start gap-2 text-sm">
+          <label className="flex items-start gap-2 text-sm">
             <input
               type="checkbox"
+              name="marketingOptIn"
               checked={formData.marketingOptIn}
-              onChange={(e) => handleInputChange('marketingOptIn', e.target.checked)}
+              onChange={handleInputChange}
               className="mt-0.5 rounded accent-emerald-500"
             />
             <span className="text-slate-300">
-              Yes, I&apos;d like to receive exclusive offers and updates from FreshMart
+              Yes, I'd like to receive exclusive offers and updates from FreshMart
             </span>
-          </div>
+          </label>
 
           <div className="mt-6 flex gap-3">
             <button
-              type="button"
-              onClick={() => {
-                if (formData.name && formData.email && formData.phone) {
-                  onSubmit(formData);
-                  setFormData({
-                    name: '',
-                    email: '',
-                    phone: '',
-                    loyaltyNumber: '',
-                    marketingOptIn: false
-                  });
-                }
-              }}
+              type="submit"
               className="flex-1 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 px-4 py-2.5 text-sm font-bold text-white hover:from-emerald-600 hover:to-green-700 transition-all shadow-lg"
             >
               Submit Entry
@@ -386,7 +397,7 @@ const EntryModal: React.FC<EntryModalProps> = ({ open, onClose, onSubmit, entryN
               Cancel
             </button>
           </div>
-        </div>
+        </form>
 
         <div className="mt-4 pt-4 border-t border-white/10">
           <p className="text-xs text-center text-slate-400">
@@ -427,18 +438,18 @@ const ContestStats: React.FC<ContestStatsProps> = ({ stats }) => {
 
 // Main App Component
 const GiveawayApp: React.FC = () => {
-  const locations: Location[] = [
+  const locations: Location[] = useMemo(() => [
     { id: 1, name: 'Downtown Plaza', address: '123 Main St, City Center' },
     { id: 2, name: 'Westside Mall', address: '456 West Ave, West District' },
     { id: 3, name: 'Riverside Commons', address: '789 River Rd, Riverside' },
     { id: 4, name: 'North Park', address: '321 North Blvd, Northside' }
-  ];
+  ], []);
 
-  const prizes: Prize[] = [
+  const prizes: Prize[] = useMemo(() => [
     { tier: 'GRAND PRIZE', name: '$500 Gift Card', value: 'Value: $500', quantity: 1 },
     { tier: '2ND PRIZE', name: 'Smart TV Package', value: 'Value: $350', quantity: 2 },
     { tier: '3RD PRIZE', name: 'Shopping Spree', value: 'Value: $100', quantity: 5 }
-  ];
+  ], []);
 
   const [selectedLocation, setSelectedLocation] = useState<Location>(locations[0]);
   const [entries, setEntries] = useState<Entry[]>(() => {
@@ -451,12 +462,12 @@ const GiveawayApp: React.FC = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [selectedEntry, setSelectedEntry] = useState<number | null>(null);
 
-  const stats: Stats = {
+  const stats = useMemo(() => ({
     totalEntries: entries.filter(e => e.claimed).length,
     uniqueParticipants: Math.floor(entries.filter(e => e.claimed).length * 0.6),
     prizesAwarded: 47,
     daysLeft: 3
-  };
+  }), [entries]);
 
   const handleSelectEntry = (entryIndex: number): void => {
     setSelectedEntry(entryIndex + 1);

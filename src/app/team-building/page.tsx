@@ -171,7 +171,7 @@ const PrizeShowcase: React.FC<PrizeShowcaseProps> = ({ prizes, currentWeek }) =>
       </h3>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
         {prizes.map((prize, idx) => (
-          <div key={idx} className="bg-white/10 backdrop-blur-sm rounded-lg p-3 border border-white/20">
+          <div key={`${prize.name}-${idx}`} className="bg-white/10 backdrop-blur-sm rounded-lg p-3 border border-white/20">
             <div className="text-emerald-400 font-bold text-sm mb-1">{prize.tier}</div>
             <div className="text-white font-semibold">{prize.name}</div>
             <div className="text-white/60 text-sm mt-1">{prize.value}</div>
@@ -207,12 +207,12 @@ const EntryGrid: React.FC<EntryGridProps> = ({ entries, onSelectEntry }) => {
       </div>
       
       <div className="grid grid-cols-10 gap-2">
-        {entries.map((entry, idx) => (
+        {entries.map((entry) => (
           <button
             type="button"
-            key={idx}
-            onClick={() => !entry.claimed && onSelectEntry(idx)}
-            onMouseEnter={() => setHoveredEntry(idx)}
+            key={entry.number}
+            onClick={() => !entry.claimed && onSelectEntry(entry.number - 1)}
+            onMouseEnter={() => setHoveredEntry(entry.number - 1)}
             onMouseLeave={() => setHoveredEntry(null)}
             disabled={entry.claimed}
             className={`
@@ -224,14 +224,14 @@ const EntryGrid: React.FC<EntryGridProps> = ({ entries, onSelectEntry }) => {
             `}
           >
             <span className="absolute inset-0 flex items-center justify-center">
-              {String(idx + 1).padStart(3, '0')}
+              {String(entry.number).padStart(3, '0')}
             </span>
             {entry.claimed && (
               <div className="absolute -top-1 -right-1 bg-red-500 rounded-full p-0.5">
                 <Check className="w-3 h-3 text-white" />
               </div>
             )}
-            {hoveredEntry === idx && !entry.claimed && (
+            {hoveredEntry === entry.number - 1 && !entry.claimed && (
               <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-black/90 text-white text-xs px-2 py-1 rounded whitespace-nowrap z-20">
                 Click to select
               </div>
@@ -354,18 +354,6 @@ const EntryModal: React.FC<EntryModalProps> = ({ open, onClose, onSubmit, entryN
               value={formData.phone}
               onChange={handleInputChange}
               className="w-full rounded-lg bg-slate-800/50 px-3 py-2 outline-none ring-1 ring-white/10 focus:ring-2 focus:ring-emerald-500/50 text-white"
-            />
-          </label>
-
-          <label className="block text-sm">
-            <span className="mb-1 block text-slate-200 font-medium">FreshMart Rewards # (Optional)</span>
-            <input
-              type="text"
-              name="loyaltyNumber"
-              value={formData.loyaltyNumber}
-              onChange={handleInputChange}
-              className="w-full rounded-lg bg-slate-800/50 px-3 py-2 outline-none ring-1 ring-white/10 focus:ring-2 focus:ring-emerald-500/50 text-white"
-              placeholder="Earn 2x entries!"
             />
           </label>
 
