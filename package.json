@@ -2,14 +2,17 @@
   "name": "tailwind-plus-salient",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "cards": "concurrently -k \"next dev -p 4000\" \"wait-on http-get://localhost:4000 && node scripts/render-cards.cjs\"",
-    "open-cards": "echo 'Generated PNGs:' && ls -1 out/cards && echo '\nTo view, open the Codespaces file browser and navigate to out/cards/'"
-  },
+"scripts": {
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start",
+  "lint": "next lint",
+  "cards": "concurrently -k \"next dev -p 4000\" \"wait-on http-get://localhost:4000 && node scripts/render-cards.cjs\"",
+  "open-cards": "echo 'Generated PNGs:' && ls -1 out/cards && echo '\nTo view, open the Codespaces file browser and navigate to out/cards/'",
+  "render:banners": "node scripts/render-banners.mjs",
+  "export:banners": "next dev -p 4001 & sleep 3 && RENDER_URL=http://localhost:4001/ads/preview node scripts/render-banners.mjs && pkill -f \"next dev -p 4001\" || true"
+}
+,
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {
     "@headlessui/react": "^2.1.0",

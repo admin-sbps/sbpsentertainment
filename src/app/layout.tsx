@@ -6,7 +6,7 @@ import '@/styles/tailwind.css'
 
 export const metadata: Metadata = {
   title: {
-    template: '%s - TaxPal',
+    template: '%s - SBPS',
     default: 'SBPS Entertainment - Technology For Fundraisers',
   },
   description:

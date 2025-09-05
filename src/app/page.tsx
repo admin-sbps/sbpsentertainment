@@ -97,17 +97,12 @@ export default function Example() {
           <div className="flex lg:flex-1">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">SBPS Entertainment</span>
-              {/* Note: Update these logo URLs with your own images later */}
-              <img
-                alt="SBPS Entertainment Logo"
-                src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
-                className="h-8 w-auto dark:hidden"
-              />
-              <img
-                alt="SBPS Entertainment Logo"
-                src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
-                className="h-8 w-auto not-dark:hidden"
-              />
+<a href="#" className="-m-1.5 p-1.5 flex items-center">
+  <span className="sr-only">SBPS Entertainment</span>
+  <span className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+    SBPS
+  </span>
+</a>
             </a>
           </div>
           <div className="flex lg:hidden">
